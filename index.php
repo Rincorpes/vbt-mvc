@@ -9,5 +9,22 @@
  * @version 1.0.0
  */
 
-echo 'Hola Mundo!';
+// Rquire Global Config file
+require_once  __DIR__ . '/config/global.php';
+// Require Autoload
+require_once CORE_PATH . 'autoload.php';
+
+// Classes used in this file
+use Vbt\Core\Autoload,
+	Vbt\Core\Init;
+
+try {
+	// Setup Autoloader
+	Autoload::setup('Vbt', ROOT);
+	// Initiate Application
+	$init = new Init();
+} catch (Exception $e) {
+	// if there's an error
+	echo $e->getMessage();
+}
 ?>
