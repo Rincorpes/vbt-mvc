@@ -6,9 +6,19 @@ namespace Vbt\Core;
  */
 class Response
 {
-	public function __construct($str)
+	public function __construct($content)
 	{
-		echo $str;
+		echo $content;
+	}
+
+	public static function header()
+	{
+
+	}
+
+	public static function setcookie($name, $value)
+	{
+		setcookie($name, $value, time() + 3600, '/');
 	}
 }
 ?>

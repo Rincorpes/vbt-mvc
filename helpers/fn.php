@@ -15,7 +15,7 @@ class Fn
 	{
 		if (! function_exists($fn)) {
 			// The path to the function in the functions directory
-			$fnPath = __DIR__ . DS . 'functions' .DS . $fn . '.php';
+			$fnPath = FUNCTIONS_PATH . $fn . '.php';
 
 			if (is_readable($fnPath)) {
 				// Require the file only once

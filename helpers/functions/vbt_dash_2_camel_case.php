@@ -3,6 +3,8 @@ namespace Vbt\Helpers\Functions;
 
 /**
  * Turns dash case into camel case
+ *
+ * @param $str string The string that will be converted into camel case
  */
 function vbt_dash_2_camel_case($str)
 {

@@ -8,7 +8,7 @@ use Exception,
 /**
  * Runs the App
  */
-class Init extends Config
+class Init
 {
 	/**
 	 * Saves the Singleton pattern object
@@ -22,14 +22,13 @@ class Init extends Config
 	 */
 	public function __construct()
 	{
-		// Call the parent class constructor
-		parent::__construct();
 
 		// Call static method to register the instance for any class into
 		// this class $_object property
 		$this->_object = Registry::getInstance();
+		$this->_object->_config = new Config();
 		// Instance Router passing the configs setted on this parent class
-		$this->_object->_router = new Router($this->_configs);
+		$this->_object->_router = new Router($this->_object->_config);
 
 		// Run the app passing the Router clas instance
 		$this->bootstrap($this->_object->_router);
@@ -47,7 +46,7 @@ class Init extends Config
 		$controllerClassName = 'Vbt\\Controllers\\' . $controllerClassName;
 
 		// set controller path
-		$controllerPath = ROOT . 'controllers' . DS . $controller . '.php';
+		$controllerPath = CONTROLLERS_PATH . $controller . '.php';
 
 		if (is_readable($controllerPath)) {
 

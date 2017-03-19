@@ -11,18 +11,25 @@ class Config
 	 *
 	 * @var array
 	 */
-	protected $_configs = array();
+	private $_configs = array();
 
 	/**
-	 * The class constructor
+	 * The class constructor.
+	 * You can pass your default configs when you call this class
+	 * If not, the default constans will be used.
+	 * You can also modify the default constans in global.php
+	 *
+	 * * @param $params array Your default configs
 	 */
-	function __construct()
+	function __construct($params = array())
 	{
 		// Default name for the base url controller
-		$this->default_controller = 'home';
+		$this->default_controller = (in_array('default_controller', $params)) ? $params['default_controller'] : DEFAULT_CONTROLLER;
 		// the method will be executed if there's not method defined
 		// See CORE_PATH . 'router.php'
-		$this->default_method = 'index';
+		$this->default_method = (in_array('default_method', $params)) ? $params['default_method'] : DEFAULT_METHOD;
+
+		$this->default_template = (in_array('default_template', $params)) ? $params['default_template'] : DEFAULT_TEMPLATE;
 	}
 	/**
 	 * set properties

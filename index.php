@@ -22,7 +22,7 @@ try {
 	// Setup Autoloader
 	Autoload::setup('Vbt', ROOT);
 	// Initiate Application
-	$init = new Init();
+	$nit = new Init();
 } catch (Exception $e) {
 	// if there's an error
 	echo $e->getMessage();

@@ -35,9 +35,9 @@ class Router
 	/**
 	 * The class constructor
 	 *
-	 * @param $configs Array The configs setted in CONFIG_PATH . config.php
+	 * @param $_configs Array The configs setted in CONFIG_PATH . config.php
 	 */
-	public function __construct($configs)
+	public function __construct($_configs)
 	{
 		// If thers a value stored in $_GET['url']
 		if (Request::get('url')) {
@@ -62,10 +62,10 @@ class Router
 		}
 
 		// If there's no controller taken from the url
-		if (!$this->_controller) $this->_controller = $configs['default_controller'];
+		if (!$this->_controller) $this->_controller = $_configs->default_controller;
 
 		// If there's no method taken from the url
-		if (!$this->_method) $this->_method = $configs['default_method'];
+		if (!$this->_method) $this->_method = $_configs->default_method;
 
 		// If there's no Aarguments taken from the url
 		if (!isset($this->_arguments)) $this->_arguments = array();
