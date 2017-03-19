@@ -1,7 +1,8 @@
 <?php
 namespace Vbt\Controllers;
 
-use Vbt\Core\Controller;
+use Vbt\Core\Controller,
+	Vbt\Core\Response;
 
 /**
  * Home controller
@@ -21,7 +22,7 @@ class Home extends Controller
 	 */
 	public function index()
 	{
-		echo 'Hello World';
+		new Response('Hello World!');
 	}
 }
 ?>
