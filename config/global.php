@@ -54,6 +54,25 @@ define('CONTROLLERS_PATH', ROOT . 'controllers' . DS);
  */
 define('FUNCTIONS_PATH', ROOT . 'helpers' . DS . 'functions' . DS);
 /**
+ * Path to the views dir
+ *
+ * @var string
+ */
+define('VIEWS_PATH', ROOT . 'views' . DS);
+/**
+ * Path to the cache dir
+ *
+ * @var string
+ */
+define('CACHE_PATH', ROOT . 'tmp' . DS . 'cache' . DS);
+/**
+ * Path to the temporal template dir
+ *
+ * @var string
+ */
+define('TEMPLATE_COMPILE_PATH', ROOT . 'tmp' . DS . 'template' . DS);
+
+/**
  * Defaults
  */
 /**
