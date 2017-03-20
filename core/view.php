@@ -75,6 +75,8 @@ class View extends Smarty
 
 	public function render($view, $item = null)
 	{
+		if($item) $this->_item = $item;
+
 		$this->template_dir = VIEWS_PATH . 'layout' . DS . $this->_template . DS;
 		$this->config_dir = VIEWS_PATH . 'layout' . DS . $this->_template . DS . 'configs' . DS;
 		$this->cache_dir = CACHE_PATH;
@@ -84,14 +86,16 @@ class View extends Smarty
 		$template_path =  $this->template_dir . 'index' . $this->_file_ext;
 
 		if (is_readable($view_path)) {
-			if (file_exists($template_path)) {
+			if (file_exists($template_path))
 				$this->assign('_content', $view_path);
-			} else {
+			else
 				throw new Exception('Error processing request. The file ' . $template_path . ' does not exist.', 1);
-			}
 		} else {
 			throw new Exception('Error processing request. The file ' . $view_path . ' does not exist.', 1);
 		}
+
+		$this->caching = true;
+		$this->compile_check = true;
 
 		$this->display('index.tpl');
 	}
