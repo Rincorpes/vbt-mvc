@@ -2,95 +2,60 @@
 /**
  * Global Configs
  */
-
 /**
- * Paths
- */
-
-/**
- * Directory Separator. Do not modify
- *
- * @var DS constant 
- */
-if (! defined('DS'))
-	define('DS', DIRECTORY_SEPARATOR);
-/**
- *  Root directory of the app. it's supposed to be the parent
+ * Root directory of the app. it's supposed to be the parent
  * directory of config directory.
  *
  * You can modify this if you run the app in another dir
  *
  * @var ROOT string
  */
-if (! defined('ROOT'))
-	define('ROOT', dirname(__DIR__) . DS);
+defined('ROOT') or define('ROOT', dirname(__DIR__));
 /**
  * @var CONFIG_PATH string Path to the config directory
  */
-if (! defined('CONFIG_PATH'))
-	define('CONFIG_PATH', ROOT . 'config' . DS);
+define('CONFIG_PATH', ROOT . '/config');
 /**
  * Path to the app core directory
  *
  * @var string 
  */
-define('CORE_PATH', ROOT . 'core' . DS);
+define('CORE_PATH', ROOT . '/core');
 /**
- * Path to the lib directory
+ * Path to the apps dir
  *
  * @var string
  */
-define('LIB_PATH', ROOT . 'lib' . DS);
+define('APPS_PATH', ROOT . '/apps');
 /**
- * Path to the controllers dir
+ * Path to the apps dir
  *
  * @var string
  */
-define('CONTROLLERS_PATH', ROOT . 'controllers' . DS);
+define('MODULES_PATH', ROOT . '/modules');
 /**
  * Path to the helper functions dir
  *
  * @var string
  */
-define('FUNCTIONS_PATH', ROOT . 'helpers' . DS . 'functions' . DS);
-/**
- * Path to the views dir
- *
- * @var string
- */
-define('VIEWS_PATH', ROOT . 'views' . DS);
-/**
- * Path to the cache dir
- *
- * @var string
- */
-define('CACHE_PATH', ROOT . 'tmp' . DS . 'cache' . DS);
-/**
- * Path to the temporal template dir
- *
- * @var string
- */
-define('TEMPLATE_COMPILE_PATH', ROOT . 'tmp' . DS . 'template' . DS);
+define('FUNCTIONS_PATH', ROOT . '/helpers/functions');
 
 /**
- * Defaults
+ * name for the deault App
+ *
+ * @var string
  */
+define('DEFAULT_APP', 'frontend');
 /**
  * name for the deault Controller
  *
  * @var string
  */
-define('DEFAULT_CONTROLLER', 'home');
+define('DEFAULT_CONTROLLER', 'index');
 /**
  * The name for the default method of any controller
  *
  * @var string
  */
 define('DEFAULT_METHOD', 'index');
-/**
- * Name for the default Template
- *
- * @var string
- */
-define('DEFAULT_TEMPLATE', 'vbt');
 ?>

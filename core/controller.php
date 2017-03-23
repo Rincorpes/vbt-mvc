@@ -20,7 +20,7 @@ abstract class Controller
 	 */
 	public function __construct()
 	{
-		$this->_view = new View();
+		//$this->_view = new View();
 	}
 	/**
 	 * the main method in all controllers

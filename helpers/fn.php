@@ -1,7 +1,7 @@
 <?php
 namespace Vbt\Helpers;
 
-use Exception;
+use Vbt\Core\VBTException;
 
 /**
  * Class to load app functions using its namespace
@@ -15,7 +15,7 @@ class Fn
 	{
 		if (! function_exists($fn)) {
 			// The path to the function in the functions directory
-			$fnPath = FUNCTIONS_PATH . $fn . '.php';
+			$fnPath = FUNCTIONS_PATH . '/' . $fn . '.php';
 
 			if (is_readable($fnPath)) {
 				// Require the file only once
@@ -30,7 +30,7 @@ class Fn
 				else
 					call_user_func($fn);
 			} else {
-				throw new Exception('The file ' . $fnPath . ' does not exists', 1);
+				throw new VBTException('The file ' . $fnPath . ' does not exists', 1);
 			}
 		}
 	}

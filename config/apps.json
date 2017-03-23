@@ -1,0 +1,6 @@
+{
+	"backend":
+		{
+			"default_controller": "admin"
+		}
+}

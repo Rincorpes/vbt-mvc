@@ -20,4 +20,3 @@ function vbt_dash_2_camel_case($str)
 	$str = implode('', $str);
 	return $str;
 }
-?>

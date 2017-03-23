@@ -9,22 +9,18 @@
  * @version 1.0.0
  */
 
-// Rquire Global Config file
-require_once  __DIR__ . '/config/global.php';
-// Require Autoload
-require_once CORE_PATH . 'autoload.php';
+defined('ROOT') or define('ROOT', __DIR__);
 
-// Classes used in this file
-use Vbt\Core\Autoload,
-	Vbt\Core\Init;
+require_once ROOT . '/core/init.php';
+
+use Vbt\Core\Init,
+	Vbt\Core\Bootstrap,
+	Vbt\Core\VBTException;
 
 try {
-	// Setup Autoloader
-	Autoload::setup('Vbt', ROOT);
-	// Initiate Application
-	$nit = new Init();
-} catch (Exception $e) {
-	// if there's an error
-	echo $e->getMessage();
+	$vbt = new Init('Vbt', ROOT, true);
+	Bootstrap::run($vbt->_object->_router);
+} catch (VBTException $e) {
+	echo $e->getError();
 }
 ?>

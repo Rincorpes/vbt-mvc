@@ -14,6 +14,18 @@ use Vbt\Core\Request,
 class Router
 {
 	/**
+	 * Saves current app name
+	 *
+	 * @var string
+	 */
+	private $_app;
+	/**
+	 * Saves current module if it exists
+	 *
+	 * @var string
+	 */
+	private $_module;
+	/**
 	 * Name of the controller that will be used
 	 *
 	 * @var string
@@ -37,9 +49,8 @@ class Router
 	 *
 	 * @param $_configs Array The configs setted in CONFIG_PATH . config.php
 	 */
-	public function __construct($_configs)
+	public function __construct()
 	{
-		// If thers a value stored in $_GET['url']
 		if (Request::get('url')) {
 			$url = array();
 
@@ -56,16 +67,64 @@ class Router
 			$url = $arr;
 
 			// Get the values for the properties
-			$this->_controller = array_shift($url);
+			$this->_module = array_shift($url);
+
+			if ($this->_module) {
+				$modules = array();
+
+				$modules_path = Fn::vbt_create_path(array(CONFIG_PATH, 'modules.json'));
+
+				if (file_exists($modules_path))
+					$modules = json_decode(file_get_contents($modules_path), true);
+				else
+					throw new VBTException('The file ' . $modules_path . ' does not exists', 1);
+					
+				if (count($modules)) {
+					if (in_array($this->_module, $modules)) {
+						$this->_controller = array_shift($url);
+					} else {
+						$this->_controller = $this->_module;
+						$this->_module = false;
+					}
+				} else {
+					$this->_controller = $this->_module;
+					$this->_module = false;
+				}
+			} else {
+				$this->_module = false;
+			}
+			//$this->_controller = array_shift($url);
 			$this->_method = array_shift($url);
 			$this->_arguments = $url;
+
+			$apps = array();
+
+			$apps_path = Fn::vbt_create_path(array(CONFIG_PATH, 'apps.json'));
+
+			if (file_exists($apps_path))
+				$apps = json_decode(file_get_contents($apps_path), true);
+			else
+				throw new VBTException('The file ' . $apps_path . ' does not exists', 1);
+
+			if ($apps) {
+				foreach ($apps as $key => $value) {
+					if (array_key_exists('default_controller', $apps[$key])) {
+						if ($this->_controller === $apps[$key]['default_controller']) {
+							$this->_app = $key;
+							break;
+						}
+					}
+				}
+			}
 		}
 
+		if (! $this->_app) $this->_app = DEFAULT_APP;
+
 		// If there's no controller taken from the url
-		if (!$this->_controller) $this->_controller = $_configs->default_controller;
+		if (!$this->_controller) $this->_controller = DEFAULT_CONTROLLER;
 
 		// If there's no method taken from the url
-		if (!$this->_method) $this->_method = $_configs->default_method;
+		if (!$this->_method) $this->_method = DEFAULT_METHOD;
 
 		// If there's no Aarguments taken from the url
 		if (!isset($this->_arguments)) $this->_arguments = array();
