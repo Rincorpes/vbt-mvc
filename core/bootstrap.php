@@ -28,6 +28,7 @@ class Bootstrap
 		$arguments = $_router->getArguments();
 
 		if (! $module) {
+			$appConfig = Fn::vbt_create_path(array(APPS_PATH, $app, 'config', 'config.php'));
 			$namespace = 'Vbt\\Apps\\' . ucwords($app) . '\\Controllers\\';
 			$controllerPath = Fn::vbt_create_path(array(APPS_PATH, $app, 'controllers', $controller . '.php'));
 		} else {
@@ -42,6 +43,8 @@ class Bootstrap
 		if (is_readable($controllerPath)) {
 
 			if (file_exists($controllerPath)) {
+
+				if (! $module) require_once $appConfig;
 
 				// Instance the controller
 				$controller = new $controllerClassName;
